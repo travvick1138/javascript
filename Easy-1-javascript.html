@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Easy javascript test one</title>
+        <style type="text/css">
+          body {
+              font: 16px/1.5 Helvetica, Arial, Sans-Serif;
+              padding: 0 1em;
+            }
+          #result {
+             background: #fff;
+             border: solid 2px black;
+             display: flex;
+             flex-direction: column;
+             flex-wrap: wrap;
+             padding: 1em;
+           }
+          .error {
+            background: #c00;
+            color: white;
+            margin: 1em 0;
+            padding: 0.5em 1em;
+          }
+        </style>
+    </head>
+    <body>
+        <h1>Exercise Name</h1>
+        <h2></h2>
+        <form>
+          Enter a value here
+          <div id="error"></div>
+          <input name="input">
+          <!-- <button type="submit">Go</button> -->
+        </form>
+        <h2></h2>
+        <div id="result"></div>
+
+        <script type="text/javascript">
+
+            function numberwithcommas(input) {
+              var parts = input.toString().split(".");
+              parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+              return parts.join(".")
+            }
+
+            function transform(input){
+              var numwicom = numberwithcommas(input)
+              if (numwicom) {
+                clearError();
+                printResult(numwicom);
+              }
+              else {
+                printError('Enter a value');
+              }
+            }
+
+            setup(transform);
+
+            function printResult(str) {
+              document.getElementById('result').innerHTML = str;
+            }
+
+            function printError(str) {
+              var err = document.getElementById('error');
+              err.classList.add('error');
+              err.innerHTML = str;
+            }
+
+            function clearError() {
+              var err = document.getElementById('error');
+              err.innerHTML = '';
+              err.classList.remove('error');
+            }
+
+            function setup(callback) {
+              document.querySelector('form')
+                .addEventListener('input', function (evt) {
+                evt.preventDefault();
+                var value = document.querySelector('input').value;
+                callback(value);
+              });
+            }
+        </script>
+    </body>
+</html>
