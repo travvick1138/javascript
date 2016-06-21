@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>My Awesome Page</title>
+        <style type="text/css">
+        body {
+            font: 16px/1.5 Helvetica, Arial, Sans-Serif;
+            padding: 0 1em;
+          }
+        #result {
+           background: #fff;
+           border: solid 2px black;
+           display: flex;
+           flex-direction: column;
+           word-wrap: break-word;
+           padding: 1em;
+         }
+        .error {
+          background: #c00;
+          color: white;
+          margin: 1em 0;
+          padding: 0.5em 1em;
+        }
+        </style>
+    </head>
+    <body>
+      <div style="background-image:url(http://www.thecalculatorsite.com/images/articles/roman-numerals/1-to-10-roman-numerals-on-black.jpg)">
+        <h1>Exercise Name</h1>
+        <h2>Input</h2>
+        <form>
+          Enter a value here
+          <div id="error"></div>
+          <input name="input">
+          <button type="submit">Go</button>
+        </form>
+        <h2>Output</h2>
+        <div id="result"></div>
+      </div>
+
+        <script type="text/javascript">
+        function transform(input) {
+
+          if (input) {
+            clearError();
+            printResult(input);
+          }
+          else {
+            printError('Enter a value');
+          }
+        }
+
+        setup(transform);
+
+        function printResult(str) {
+          document.getElementById('result').innerHTML = str;
+        }
+
+        function printError(str) {
+          var err = document.getElementById('error');
+          err.classList.add('error');
+          err.innerHTML = str;
+        }
+
+        function clearError() {
+          var err = document.getElementById('error');
+          err.innerHTML = '';
+          err.classList.remove('error');
+        }
+
+        function setup(callback) {
+          document.querySelector('form')
+            .addEventListener('submit', function (evt) {
+            evt.preventDefault();
+            var value = document.querySelector('input').value;
+            callback(value);
+          });
+        }
+        </script>
+    </body>
+</html>
