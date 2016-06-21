@@ -13,7 +13,7 @@
              border: solid 2px black;
              display: flex;
              flex-direction: column;
-             flex-wrap: wrap;
+             word-wrap: break-word;
              padding: 1em;
            }
           .error {
@@ -25,10 +25,10 @@
         </style>
     </head>
     <body>
-        <h1>Exercise Name</h1>
+        <h1>Number Expression in US english Style</h1>
         <h2></h2>
         <form>
-          Enter a value here
+          Enter a number here
           <div id="error"></div>
           <input name="input">
           <!-- <button type="submit">Go</button> -->
@@ -50,9 +50,9 @@
                 clearError();
                 printResult(numwicom);
               }
-              else {
-                printError('Enter a value');
-              }
+              // else {
+              //   printError('Enter only numbers please.');
+              // }
             }
 
             setup(transform);
