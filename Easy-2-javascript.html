@@ -4,10 +4,27 @@
         <meta charset="utf-8">
         <title>My Awesome Page</title>
         <style type="text/css">
+        html {
+          background: url(http://1.bp.blogspot.com/-wGBE7IuhHn8/UuBg4Jjpw5I/AAAAAAAAAVs/M2uo4WxQuYg/s1600/ChalkBoard_20140123-091931.png) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
         body {
             font: 16px/1.5 Helvetica, Arial, Sans-Serif;
-            padding: 0 1em;
+            text-align: center;
+            padding: 0 2em 0 2em;
           }
+        h1 {
+          font-size: 96px;
+          color: magenta;
+        }
+        form {
+          padding: 100px;
+          font-size: 48px;
+          color: magenta;
+        }
         #result {
            background: #fff;
            border: solid 2px black;
@@ -25,32 +42,41 @@
         </style>
     </head>
     <body>
-      <div style="background-image:url(http://www.thecalculatorsite.com/images/articles/roman-numerals/1-to-10-roman-numerals-on-black.jpg)">
-        <h1>Exercise Name</h1>
-        <h2>Input</h2>
+      <div>
+        <h1>Roman Numeral Converstion</h1>
+        <h2></h2>
         <form>
-          Enter a value here
+          Enter Roman Numeral Value here
           <div id="error"></div>
           <input name="input">
           <button type="submit">Go</button>
+          <h2>Numeric Transformation</h2>
+          <div id="result"></div>
         </form>
-        <h2>Output</h2>
-        <div id="result"></div>
       </div>
 
         <script type="text/javascript">
-        function transform(input) {
+        function deromanize (str) {
+        	var	str = str.toUpperCase(),
+          	validator = /^M*(?:D?C{0,3}|C[MD])(?:L?X{0,3}|X[CL])(?:V?I{0,3}|I[XV])$/,
+          	token = /[MDLV]|C[MD]?|X[CL]?|I[XV]?/g,
+          	key = {M:1000,CM:900,D:500,CD:400,C:100,XC:90,L:50,XL:40,X:10,IX:9,V:5,IV:4,I:1},
+          	num = 0, m;
+        	if (!(str && validator.test(str)))
+        		return false;
+        	while (m = token.exec(str))
+        		num += key[m[0]];
 
-          if (input) {
+          if (num) {
             clearError();
-            printResult(input);
+            printResult(num);
           }
           else {
             printError('Enter a value');
           }
         }
 
-        setup(transform);
+        setup(deromanize);
 
         function printResult(str) {
           document.getElementById('result').innerHTML = str;
